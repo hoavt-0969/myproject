@@ -5,12 +5,15 @@
  */
 package run;
 
+import view.ServerView;
+
 /**
  *
  * @author Vu Tien Hoa
  */
 public class ServerRun {
+
     public static void main(String[] args) {
-        System.out.println("Server run");
+        ServerView view = new ServerView();
     }
 }

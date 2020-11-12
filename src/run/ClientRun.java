@@ -5,12 +5,16 @@
  */
 package run;
 
+import view.ClientView;
+
 /**
  *
  * @author Vu Tien Hoa
  */
 public class ClientRun {
+
     public static void main(String[] args) {
-        System.out.println("Client Run");
+        ClientView view = new ClientView();
+        view.setVisible(true);
     }
 }

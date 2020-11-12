@@ -5,10 +5,20 @@
  */
 package view;
 
+import control.ClientControl;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.User;
 
 /**
  *
@@ -41,5 +51,25 @@ public class ClientView extends JFrame implements ActionListener {
                 System.exit(0);
             }
         });
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(btnLogin)) {
+            User model = new User(txtUsername.getText(),txtPassword.getText());
+            ClientControl clientCtr = new ClientControl();
+            clientCtr.openConnection();
+            clientCtr.sendData(model);
+            String result = clientCtr.receiveData();
+            if (result.equals("ok")) {
+                showMessage("Login succesfully!");
+            } else {
+                showMessage("Invalid username and/or password!");
+            }
+            clientCtr.closeConnection();
+        }
+    }
+
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
     }
 }
