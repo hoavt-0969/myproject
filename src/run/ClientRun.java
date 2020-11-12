@@ -10,5 +10,7 @@ package run;
  * @author Vu Tien Hoa
  */
 public class ClientRun {
-    
+    public static void main(String[] args) {
+        System.out.println("Client Run");
+    }
 }
