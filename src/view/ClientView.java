@@ -43,7 +43,9 @@ public class ClientView extends JFrame implements ActionListener {
         content.add(new JLabel("Password:"));
         content.add(txtPassword);
         content.add(btnLogin);
-
+        
+        btnLogin.addActionListener(this);
+        
         this.setContentPane(content);
         this.pack();
         this.addWindowListener(new WindowAdapter() {
