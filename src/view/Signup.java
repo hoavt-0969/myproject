@@ -5,17 +5,24 @@
  */
 package view;
 
+import control.ClientControl;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import model.User;
+
 /**
  *
  * @author Vu Tien Hoa
  */
-public class Signup extends javax.swing.JFrame {
+public class Signup extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form Signup
      */
     public Signup() {
         initComponents();
+        btnSignup.addActionListener(this);
     }
 
     /**
@@ -38,7 +45,7 @@ public class Signup extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Signup User");
+        jLabel1.setText("Signup");
 
         jLabel2.setText("Name:");
 
@@ -153,4 +160,32 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(e.getSource().equals(btnSignup)){
+            btnSignup();
+        }
+    }
+    
+    public void btnSignup(){
+        try{
+            User u = new User(txtName.getText(),txtUsername.getText(),txtPassword.getText());
+            ClientControl ctr = new ClientControl();
+            ctr.openConnection();
+            ctr.sendData(u);
+            String result = ctr.receiveData();
+            if(result.equals("ok")){
+                JOptionPane.showMessageDialog(rootPane, "Success!");
+            }
+            else{
+                JOptionPane.showConfirmDialog(rootPane, "Fail!");
+            }
+            ctr.closeConnection();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
