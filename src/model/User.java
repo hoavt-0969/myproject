@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @author Vu Tien Hoa
  */
 public class User implements Serializable{
-    private String name;
     private String userName;
     private String password;
 
