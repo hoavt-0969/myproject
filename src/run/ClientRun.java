@@ -6,6 +6,7 @@
 package run;
 
 import view.ClientView;
+import view.RegisterView;
 
 /**
  *
@@ -14,7 +15,10 @@ import view.ClientView;
 public class ClientRun {
 
     public static void main(String[] args) {
-        ClientView view = new ClientView();
+//        ClientView view = new ClientView();
+//        view.setVisible(true);
+        
+        RegisterView view = new RegisterView();
         view.setVisible(true);
     }
 }

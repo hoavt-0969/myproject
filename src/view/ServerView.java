@@ -14,8 +14,8 @@ import control.ServerControl;
 public class ServerView {
 
     public ServerView() {
-        new ServerControl();
         showMessage("TCP server is running...");
+        new ServerControl();
     }
 
     public void showMessage(String msg) {
