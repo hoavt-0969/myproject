@@ -15,14 +15,15 @@ import model.User;
  *
  * @author Vu Tien Hoa
  */
-public class Signup extends javax.swing.JFrame implements ActionListener {
+public class signup extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form Signup
      */
-    public Signup() {
+    public signup() {
         initComponents();
         btnSignup.addActionListener(this);
+        btnSignin.addActionListener(this);
     }
 
     /**
@@ -42,6 +43,7 @@ public class Signup extends javax.swing.JFrame implements ActionListener {
         txtName = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
+        btnSignin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,29 +63,31 @@ public class Signup extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        btnSignin.setText("Signin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(jLabel1))
+                        .addComponent(btnSignup)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnSignin)
+                        .addGap(21, 21, 21))
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSignup)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtName)
-                                .addComponent(txtUsername)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtName)
+                            .addComponent(txtUsername)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))
                 .addGap(126, 126, 126))
         );
         layout.setVerticalGroup(
@@ -103,9 +107,11 @@ public class Signup extends javax.swing.JFrame implements ActionListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(btnSignup)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSignup)
+                    .addComponent(btnSignin))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,25 +138,27 @@ public class Signup extends javax.swing.JFrame implements ActionListener {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Signup().setVisible(true);
+                new signup().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSignin;
     private javax.swing.JButton btnSignup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -164,27 +172,32 @@ public class Signup extends javax.swing.JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        if(e.getSource().equals(btnSignup)){
-            btnSignup();
+        if (e.getSource().equals(btnSignup)) {
+//            btnSignup();
+            System.out.println("btnsignup");
+
+        } else {
+            new signin().setVisible(true);
+            System.out.println("btnsignin");
+            this.dispose();
         }
     }
-    
-    public void btnSignup(){
-        try{
-            User u = new User(txtName.getText(),txtUsername.getText(),txtPassword.getText());
+
+    public void btnSignup() {
+        try {
+            User u = new User(txtName.getText(), txtUsername.getText(), txtPassword.getText());
             ClientControl ctr = new ClientControl();
             ctr.openConnection();
             ctr.sendData(u);
             String result = ctr.receiveData();
-            if(result.equals("ok")){
+            if (result.equals("ok")) {
                 JOptionPane.showMessageDialog(rootPane, "Success!");
-            }
-            else{
+                System.out.println("ok");
+            } else {
                 JOptionPane.showConfirmDialog(rootPane, "Fail!");
             }
             ctr.closeConnection();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
