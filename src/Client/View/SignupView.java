@@ -189,11 +189,11 @@ public class SignupView extends javax.swing.JFrame implements ActionListener{
             ctr.sendData(u);
             String result = ctr.receiveData();
             if(result.equals("ok")){
-                JOptionPane.showConfirmDialog(rootPane, "Success!");
+                JOptionPane.showMessageDialog(rootPane, "Success!");
                 System.out.println("ok");;
             }
             else{
-                JOptionPane.showConfirmDialog(rootPane, "Fail!");
+                JOptionPane.showMessageDialog(rootPane, "Fail!");
             }
             ctr.closeConnection();
         }
