@@ -3,46 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package Server.Control;
 
+import Server.Model.User;
+import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import model.User;
+
 /**
  *
  * @author Vu Tien Hoa
  */
-public class ServerControl {
-
+public class ServerConnection {
     private Connection con;
     private ServerSocket myServer;
     private int serverPort = 8888;
 
-    public ServerControl() {
-        getDBConnection("appgame", "testuser", "password");
+    public ServerConnection() {
+//        getDBConnection("appgame", "testuser", "password");
         openServer(serverPort);
         while (true) {
             listenning();
-        }
-    }
-
-    private void getDBConnection(String dbName, String username,
-            String password) {
-        String dbUrl = "jdbc:mysql://localhost:3306/" + dbName;
-        String dbClass = "com.mysql.jdbc.Driver";
-        try {
-            Class.forName(dbClass);
-            con = DriverManager.getConnection(dbUrl,
-                    username, password);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -53,7 +38,6 @@ public class ServerControl {
             e.printStackTrace();
         }
     }
-
     private void listenning() {
         try {
             Socket clientSocket = myServer.accept();
@@ -62,30 +46,21 @@ public class ServerControl {
             Object o = ois.readObject();
             if (o instanceof User) {
                 User user = (User) o;
-                if (checkUser(user)) {
+                Signup s = new Signup();
+                if(s.AddUser(user)){
                     oos.writeObject("ok");
-                } else {
-                    oos.writeObject("false");
                 }
+                else{
+                    oos.writeObject("false");
+                }  
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private boolean checkUser(User user) throws Exception {
-        String query = "Select * FROM users WHERE username ='"
-                + user.getUserName()
-                + "' AND password ='" + user.getPassword() + "'";
-        try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            if (rs.next()) {
-                return true;
-            }
-        } catch (Exception e) {
-            throw e;
-        }
+    private boolean checkUser(User user) {
         return false;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

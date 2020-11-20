@@ -3,23 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Client;
+package Client.Control;
 
+import Server.Model.User;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import model.User;
 
 /**
  *
  * @author Vu Tien Hoa
  */
-public class SignupControl {
+public class Signup {
     private ClientConnection conn;
     private Socket mySocket;
-    public SignupControl() {
+
+    public Signup() {
         Socket mySocket = conn.openConnection();
     }
+    
     public boolean sendData(User user) {
         
         try {
@@ -49,7 +51,7 @@ public class SignupControl {
         return result;
     }
     
-    public boolean closeConnection() {
+     public boolean closeConnection() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         try {
             mySocket.close();
