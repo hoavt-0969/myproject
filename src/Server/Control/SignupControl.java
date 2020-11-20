@@ -22,7 +22,7 @@ public class SignupControl {
     }
     public boolean AddUser(User user) throws Exception{
         Connection con = new DBConnection().getDBConnection();
-        String query = "INSET INTO users(name,username,password) VALUES('"+user.getName()+"','"+user.getUsername()+"','"+user.getPassword()+ "')";
+        String query = "INSERT INTO users(name,username,password) VALUES('"+user.getName()+"','"+user.getUsername()+"','"+user.getPassword()+ "')";
         System.out.println(query);
         try {
             Statement stmt = con.createStatement();
