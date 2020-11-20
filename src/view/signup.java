@@ -5,6 +5,7 @@
  */
 package view;
 
+import Client.SignupControl;
 import control.ClientControl;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,7 +78,6 @@ public class signup extends javax.swing.JFrame implements ActionListener {
                         .addGap(28, 28, 28)
                         .addComponent(btnSignin)
                         .addGap(21, 21, 21))
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -87,14 +87,17 @@ public class signup extends javax.swing.JFrame implements ActionListener {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtName)
                             .addComponent(txtUsername)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(99, 99, 99)))
                 .addGap(126, 126, 126))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -173,8 +176,8 @@ public class signup extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if (e.getSource().equals(btnSignup)) {
-//            btnSignup();
-            System.out.println("btnsignup");
+            btnSignup();
+//            System.out.println("btnsignup");
 
         } else {
             new signin().setVisible(true);
@@ -186,8 +189,7 @@ public class signup extends javax.swing.JFrame implements ActionListener {
     public void btnSignup() {
         try {
             User u = new User(txtName.getText(), txtUsername.getText(), txtPassword.getText());
-            ClientControl ctr = new ClientControl();
-            ctr.openConnection();
+            SignupControl ctr = new SignupControl();
             ctr.sendData(u);
             String result = ctr.receiveData();
             if (result.equals("ok")) {

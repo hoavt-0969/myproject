@@ -3,28 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package Client;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-import model.User;
 
 /**
  *
  * @author Vu Tien Hoa
  */
-public class ClientControl {
-
+public class ClientConnection {
     private Socket mySocket;
     private String serverHost = "localhost";
     private int serverPort = 8888;
 
-    public ClientControl() {
+    public ClientConnection() {
+        
     }
-
     public Socket openConnection() {
         try {
             mySocket = new Socket(serverHost, serverPort);
@@ -34,5 +28,4 @@ public class ClientControl {
         }
         return mySocket;
     }
-
 }

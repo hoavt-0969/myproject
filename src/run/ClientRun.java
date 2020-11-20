@@ -5,8 +5,9 @@
  */
 package run;
 
-import view.ClientView;
-import view.RegisterView;
+//import view.ClientView;
+//import view.RegisterView;
+import view.signin;
 
 /**
  *
@@ -17,8 +18,9 @@ public class ClientRun {
     public static void main(String[] args) {
 //        ClientView view = new ClientView();
 //        view.setVisible(true);
-        
-        RegisterView view = new RegisterView();
+        signin view = new signin();
         view.setVisible(true);
+//        RegisterView view = new RegisterView();
+//        view.setVisible(true);
     }
 }
