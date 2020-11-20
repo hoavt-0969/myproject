@@ -13,7 +13,7 @@ import java.sql.DriverManager;
  * @author Vu Tien Hoa
  */
 public class DBConnection {
-    private String username = "testuserc";
+    private String username = "testuser";
     private String password = "password";
     private String dbname = "appgame";
     private String url = "jdbc:mysql://localhost:3306/";

@@ -151,10 +151,10 @@ public class Signin extends javax.swing.JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
       //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if(e.getSource().equals(btnSignin)){
-            System.out.println("signin");
+//            System.out.println("signin");
         }
         else{
-            new Signup().setVisible(true);
+            new SignupView().setVisible(true);
             this.dispose();
         }
     }

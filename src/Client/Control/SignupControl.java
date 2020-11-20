@@ -14,12 +14,11 @@ import java.net.Socket;
  *
  * @author Vu Tien Hoa
  */
-public class Signup {
-    private ClientConnection conn;
-    private Socket mySocket;
-
-    public Signup() {
-        Socket mySocket = conn.openConnection();
+public class SignupControl {
+//    private Socket mySocket;
+    private Socket mySocket = new ClientConnection().openConnection();
+    public SignupControl() {
+        
     }
     
     public boolean sendData(User user) {

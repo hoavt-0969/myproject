@@ -14,25 +14,22 @@ import java.sql.Statement;
  *
  * @author Vu Tien Hoa
  */
-public class Signup {
+public class SignupControl {
     
         
 //    ServerConnection con = new ServerConnection();
-    public Signup() {
+    public SignupControl() {
     }
     public boolean AddUser(User user) throws Exception{
         Connection con = new DBConnection().getDBConnection();
-        String query = "INSET INTO users(name,username,password) VALUES("+user.getName()+","+user.getUsername()+","+user.getPassword()+ ")";
+        String query = "INSET INTO users(name,username,password) VALUES('"+user.getName()+"','"+user.getUsername()+"','"+user.getPassword()+ "')";
+        System.out.println(query);
         try {
             Statement stmt = con.createStatement();
             int rowCount = stmt.executeUpdate(query);
             if(rowCount > 0){
                 return true;
             }
-//            ResultSet rs = stmt.executeQuery(query);
-//            if (rs.next()) {
-//                return true;
-//            }
         } catch (Exception e) {
             throw e;
         }

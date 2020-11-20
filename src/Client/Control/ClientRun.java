@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server.Control;
+package Client.Control;
+
+import Client.View.SignupView;
+import Server.Control.SignupControl;
 
 /**
  *
  * @author Vu Tien Hoa
  */
-public class Run {
+public class ClientRun {
     public static void main(String[] args) {
-        System.out.println("Server is running...");
-        ServerConnection connect = new ServerConnection();
+        SignupView vew = new SignupView();
+        vew.setVisible(true);
     }
 }

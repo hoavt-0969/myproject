@@ -46,7 +46,7 @@ public class ServerConnection {
             Object o = ois.readObject();
             if (o instanceof User) {
                 User user = (User) o;
-                Signup s = new Signup();
+                SignupControl s = new SignupControl();
                 if(s.AddUser(user)){
                     oos.writeObject("ok");
                 }

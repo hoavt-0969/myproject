@@ -5,19 +5,22 @@
  */
 package Client.View;
 
+import Client.Control.SignupControl;
+import Server.Model.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Vu Tien Hoa
  */
-public class Signup extends javax.swing.JFrame implements ActionListener{
+public class SignupView extends javax.swing.JFrame implements ActionListener{
 
     /**
      * Creates new form Signup
      */
-    public Signup() {
+    public SignupView() {
         initComponents();
         btnSignin.addActionListener(this);
         btnSignup.addActionListener(this);
@@ -134,20 +137,21 @@ public class Signup extends javax.swing.JFrame implements ActionListener{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Signup().setVisible(true);
+                new SignupView().setVisible(true);
             }
         });
     }
@@ -168,12 +172,33 @@ public class Signup extends javax.swing.JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if(e.getSource().equals(btnSignup)){
-            System.out.println("signup");
+//            System.out.println("signup");
+            btnSignup();
         }
         else{
             System.out.println("Signin");
             new Signin().setVisible(true);
             this.dispose();
+        }
+    }
+    
+    public void btnSignup(){
+        try{
+            User u = new User(txtName.getText(), txtUsername.getText(), txtPassword.getText());
+            SignupControl ctr = new SignupControl();
+            ctr.sendData(u);
+            String result = ctr.receiveData();
+            if(result.equals("ok")){
+                JOptionPane.showConfirmDialog(rootPane, "Success!");
+                System.out.println("ok");;
+            }
+            else{
+                JOptionPane.showConfirmDialog(rootPane, "Fail!");
+            }
+            ctr.closeConnection();
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
 }

@@ -15,10 +15,20 @@ public class ClientConnection {
     private Socket mySocket;
     private String serverHost = "localhost";
     private int serverPort = 8888;
-
+//    private Socket mySocket;
+//    private String serverHost;
+//    private int serverPort;
+    
     public ClientConnection() {
         
     }
+
+//    public ClientConnection(Socket mySocket, String serverHost, int serverPort) {
+//        this.mySocket = mySocket;
+//        this.serverHost = serverHost;
+//        this.serverPort = serverPort;
+//    }
+//    
     public Socket openConnection() {
         try {
             mySocket = new Socket(serverHost, serverPort);
