@@ -5,6 +5,7 @@
  */
 package Client.Control;
 
+import Client.View.Signin;
 import Client.View.SignupView;
 import Server.Control.SignupControl;
 
@@ -14,7 +15,8 @@ import Server.Control.SignupControl;
  */
 public class ClientRun {
     public static void main(String[] args) {
-        SignupView vew = new SignupView();
-        vew.setVisible(true);
+        Signin view = new Signin();
+//        SignupView vew = new SignupView();
+        view.setVisible(true);
     }
 }

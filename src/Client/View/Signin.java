@@ -5,8 +5,12 @@
  */
 package Client.View;
 
+import Client.Control.ClientRequest;
+import Server.Model.NameRequest;
+import Server.Model.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -151,11 +155,42 @@ public class Signin extends javax.swing.JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
       //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if(e.getSource().equals(btnSignin)){
-//            System.out.println("signin");
+            btnSignin();
         }
-        else{
+        else if(e.getSource().equals(btnSignup)){
             new SignupView().setVisible(true);
             this.dispose();
+        }
+//        else{
+//            new SignupView().setVisible(true);
+//            this.dispose();
+//        }
+    }
+
+    private void btnSignin() {
+        try{
+            User u = new User();
+            u.setUsername(txtUsername.getText());
+            u.setPassword(txtPassword.getText());
+            NameRequest req = new NameRequest("signin", u);
+            ClientRequest ctr = new ClientRequest();
+            ctr.openConnection();
+            ctr.sendData(req);
+            String result = ctr.receiveData();
+            if(result.equals("ok")){
+                JOptionPane.showMessageDialog(rootPane, "Login Success!");
+                System.out.println("ok");
+                this.dispose();
+                Home home = new Home();
+                home.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "Login Fail!");
+            }
+            ctr.closeConnection();
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
 }

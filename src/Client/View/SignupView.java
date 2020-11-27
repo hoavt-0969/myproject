@@ -5,7 +5,9 @@
  */
 package Client.View;
 
+import Client.Control.ClientRequest;
 import Client.Control.SignupControl;
+import Server.Model.NameRequest;
 import Server.Model.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -175,8 +177,8 @@ public class SignupView extends javax.swing.JFrame implements ActionListener{
 //            System.out.println("signup");
             btnSignup();
         }
-        else{
-            System.out.println("Signin");
+        else if(e.getSource().equals(btnSignin)){
+//            System.out.println("Signin");
             new Signin().setVisible(true);
             this.dispose();
         }
@@ -185,12 +187,17 @@ public class SignupView extends javax.swing.JFrame implements ActionListener{
     public void btnSignup(){
         try{
             User u = new User(txtName.getText(), txtUsername.getText(), txtPassword.getText());
-            SignupControl ctr = new SignupControl();
-            ctr.sendData(u);
+            NameRequest nrq = new NameRequest("signup", u);
+            ClientRequest ctr = new ClientRequest();
+            ctr.openConnection();
+            ctr.sendData(nrq);
+            //User u = new User(txtName.getText(), txtUsername.getText(), txtPassword.getText());
+//            SignupControl ctr = new SignupControl();
+//            ctr.sendData();
             String result = ctr.receiveData();
             if(result.equals("ok")){
                 JOptionPane.showMessageDialog(rootPane, "Success!");
-                System.out.println("ok");;
+                System.out.println("ok");
             }
             else{
                 JOptionPane.showMessageDialog(rootPane, "Fail!");

@@ -5,6 +5,7 @@
  */
 package Server.Control;
 
+import Server.Model.NameRequest;
 import Server.Model.User;
 import com.mysql.jdbc.Connection;
 import java.io.IOException;
@@ -44,16 +45,29 @@ public class ServerConnection {
             ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
             ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
             Object o = ois.readObject();
-            if (o instanceof User) {
-                User user = (User) o;
-                SignupControl s = new SignupControl();
-                if(s.AddUser(user)){
+            if(o instanceof NameRequest){
+                NameRequest nrq = (NameRequest) o;
+                if(nrq.name.equals("signup")){
+//                    signup(nr);
+                    User u = (User) nrq.getData();
+                    System.out.println(u.getName());
                     oos.writeObject("ok");
                 }
                 else{
+//                    signin();
                     oos.writeObject("false");
-                }  
+                }
             }
+//            if (o instanceof User) {
+//                User user = (User) o;
+//                SignupControl s = new SignupControl();
+//                if(s.AddUser(user)){
+//                    oos.writeObject("ok");
+//                }
+//                else{
+//                    oos.writeObject("false");
+//                }  
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,5 +76,20 @@ public class ServerConnection {
     private boolean checkUser(User user) {
         return false;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private boolean signup(User user) throws Exception {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SignupControl s = new SignupControl();
+        if (s.AddUser(user)) {
+            return true;
+        } else {
+//            oos.writeObject("false");
+            return false;
+        }
+    }
+
+    private void signin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -9,9 +9,6 @@ package Server.Control;
  *
  * @author Vu Tien Hoa
  */
-public class ServerRun {
-    public static void main(String[] args) {
-        System.out.println("Server is running...");
-        ServerHandle hdl = new ServerHandle();
-    }
+public class SigninControl {
+    
 }
