@@ -47,7 +47,7 @@ public class ServerConnection {
             Object o = ois.readObject();
             if(o instanceof NameRequest){
                 NameRequest nrq = (NameRequest) o;
-                if(nrq.name.equals("signup")){
+                if(nrq.getName().equals("signup")){
 //                    signup(nr);
                     User u = (User) nrq.getData();
                     System.out.println(u.getName());

@@ -10,6 +10,7 @@ import Server.Model.User;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -59,9 +60,20 @@ public class ClientRequest {
         }
         return result;
     }
-    
+    public ArrayList<User> receiveArrayObject(){
+        ArrayList<User> result = new ArrayList<>();
+        try {
+            ObjectInputStream ois
+                    = new ObjectInputStream(mySocket.getInputStream());
+            Object object =  ois.readObject();
+            result = (ArrayList<User>) object;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return result;
+    }
     public boolean closeConnection() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         try {
             mySocket.close();
         } catch (Exception ex) {

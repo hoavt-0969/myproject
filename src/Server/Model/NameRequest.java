@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author Vu Tien Hoa
  */
 public class NameRequest implements Serializable{
-    public String name;
+    private String name;
     Object data;
 
     public NameRequest(String name, Object data) {

@@ -15,6 +15,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ServerHandle {
             
             if(o instanceof NameRequest){
                 NameRequest req = (NameRequest) o;
-                System.out.println(req.name);
+                System.out.println(req.getName());
 //                if(req.name.equals("signup")){
 //                    User signup = (User) req.getData();
 //                        if(signup(signup)){
@@ -66,7 +67,7 @@ public class ServerHandle {
 //                        }
 //                }
                 
-                switch(req.name){
+                switch(req.getName()){
                     case "signup":
                         User signup = (User) req.getData();
                         if(signup(signup)){
@@ -82,6 +83,10 @@ public class ServerHandle {
                         }else{
                             oos.writeObject("failed");
                         }
+                        break;
+                    case "search":
+                        String value = (String) req.getData();
+                        oos.writeObject(search(value));
                         break;
                     default:
                         System.exit(0);
@@ -130,4 +135,28 @@ public class ServerHandle {
         return false;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    private ArrayList<User> search(String value) throws Exception{
+        ArrayList<User> res = new ArrayList<>();
+        Connection con = new DBConnection().getDBConnection();
+        String query = "SELECT * FROM users WHERE name LIKE '%"+ value + "%' OR username LIKE '%" + value + "%'";
+        System.out.println(query);
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                User user = new User();
+                user.setUser_id(rs.getInt("user_id"));
+                user.setName(rs.getString("name"));
+                user.setUsername(rs.getString("username"));
+                res.add(user);
+            }
+        } catch (Exception e) {
+//            throw e;
+            e.printStackTrace();
+            return null;
+        }
+        return res;
+    }
+    
+//    private 
 }

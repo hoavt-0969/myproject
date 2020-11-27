@@ -5,8 +5,18 @@
  */
 package Client.View;
 
+import Client.Control.ClientRequest;
+import Server.Model.NameRequest;
+import Server.Model.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -74,7 +84,7 @@ public class Home extends javax.swing.JFrame implements ActionListener{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
                 .addComponent(btnSignout)
                 .addGap(27, 27, 27))
         );
@@ -140,6 +150,52 @@ public class Home extends javax.swing.JFrame implements ActionListener{
     private void btnSearch() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         System.out.println("search");
+        try{
+            
+//            User u = new User(txtName.getText(), txtUsername.getText(), txtPassword.getText());
+            NameRequest req = new NameRequest("search", txtSearch.getText());
+            ClientRequest ctr = new ClientRequest();
+            ctr.openConnection();
+            ctr.sendData(req);
+            
+            ArrayList<User> result = ctr.receiveArrayObject();
+            if(result.size()>0){
+                JFrame f = new JFrame();
+//                Object[][] test = null
+                String column[] = {"ID", "Name","Username"};
+                DefaultTableModel tableModel = new DefaultTableModel(column, 0);
+                
+                for(int i = 0; i< result.size(); i++){
+                    int user_id = result.get(i).getUser_id();
+                    String name = result.get(i).getName();
+                    String username = result.get(i).getUsername();
+                    Object[] data = {user_id,name,username};
+//                    test.ad
+                    tableModel.addRow(data);
+                }
+                JTable jt = new JTable(tableModel);
+//                String data[][] = { { "101", "Tran Van Minh", "6000" }, 
+//                { "102", "Phan Van Tai", "8000" }, 
+//                { "101", "Do Cao Hoc", "7000" } };
+                
+                
+                jt.setBounds(30, 40, 200, 300);
+ 
+                JScrollPane sp = new JScrollPane(jt);
+                f.add(sp);
+
+                f.setSize(500, 300);
+                f.setVisible(true);
+            }
+            
+//            System.out.println(result.get(0).getName());
+//            User test = (User) result.get(0);
+//            System.out.println(test.getName());
+            ctr.closeConnection();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     
