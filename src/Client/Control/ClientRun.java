@@ -16,7 +16,6 @@ import Server.Control.SignupControl;
 public class ClientRun {
     public static void main(String[] args) {
         Signin view = new Signin();
-//        SignupView vew = new SignupView();
         view.setVisible(true);
     }
 }

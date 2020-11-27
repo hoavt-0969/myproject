@@ -75,16 +75,13 @@ public class ServerConnection {
 
     private boolean checkUser(User user) {
         return false;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private boolean signup(User user) throws Exception {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         SignupControl s = new SignupControl();
         if (s.AddUser(user)) {
             return true;
         } else {
-//            oos.writeObject("false");
             return false;
         }
     }

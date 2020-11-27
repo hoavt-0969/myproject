@@ -49,43 +49,43 @@ public class ServerHandle {
             if(o instanceof NameRequest){
                 NameRequest req = (NameRequest) o;
                 System.out.println(req.name);
-                if(req.name.equals("signup")){
-                    User signup = (User) req.getData();
-                        if(signup(signup)){
-                            oos.writeObject("ok");
-                        }else{
-                            oos.writeObject("failed");
-                        }
-                }
-                else if(req.name.equals("signin")){
-                    User signin = (User) req.getData();
-                        if(signin(signin)){
-                            oos.writeObject("ok");
-                        }else{
-                            oos.writeObject("failed");
-                        }
-                }
-                
-//                switch(req.name){
-//                    case "signup":
-//                        User signup = (User) req.getData();
+//                if(req.name.equals("signup")){
+//                    User signup = (User) req.getData();
 //                        if(signup(signup)){
 //                            oos.writeObject("ok");
 //                        }else{
 //                            oos.writeObject("failed");
 //                        }
-//                        break;
-//                    case "signin":
-//                        User signin = (User) req.getData();
-//                        if(signup(signin)){
+//                }
+//                else if(req.name.equals("signin")){
+//                    User signin = (User) req.getData();
+//                        if(signin(signin)){
 //                            oos.writeObject("ok");
 //                        }else{
 //                            oos.writeObject("failed");
 //                        }
-//                        break;
-//                    default:
-//                        System.exit(0);
 //                }
+                
+                switch(req.name){
+                    case "signup":
+                        User signup = (User) req.getData();
+                        if(signup(signup)){
+                            oos.writeObject("ok");
+                        }else{
+                            oos.writeObject("failed");
+                        }
+                        break;
+                    case "signin":
+                        User signin = (User) req.getData();
+                        if(signin(signin)){
+                            oos.writeObject("ok");
+                        }else{
+                            oos.writeObject("failed");
+                        }
+                        break;
+                    default:
+                        System.exit(0);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

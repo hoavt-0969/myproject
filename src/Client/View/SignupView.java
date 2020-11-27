@@ -200,7 +200,7 @@ public class SignupView extends javax.swing.JFrame implements ActionListener{
                 System.out.println("ok");
             }
             else{
-                JOptionPane.showMessageDialog(rootPane, "Fail!");
+                JOptionPane.showMessageDialog(rootPane, "Failed!");
             }
             ctr.closeConnection();
         }
